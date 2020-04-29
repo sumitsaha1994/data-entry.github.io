@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Data Entry</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0px;
+        }
+
+        .row {
+            padding: 0px 15px 0px 15px;
+        }
+
+        .form-title {
+            border-bottom: 2px solid #888888;
+            text-align: center;
+            width: 80%;
+            margin: auto;
+            padding-bottom: 10px;
+        }
+
+        #form-area {
+            border-right: 1px solid black;
+            height: 100%;
+            position: fixed;
+            width: 35%;
+        }
+
+        #form-container {
+            margin: 10px auto;
+            width: 90%;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px 5px #888888;
+        }
+
+        #table-area {
+            float: right;
+            width: 65%;
+            display: flex;
+        }
+
+        td {
+            padding: 0px;
+        }
+
+        #address {
+            justify-content: space-between;
+        }
+
+        [class*="col-"] {
+            padding: 0px;
+            margin: 0px auto;
+        }
+
+        #entries {
+            margin: 5px auto;
+            width: 99%;
+            table-layout: fixed;
+            word-wrap: break-word;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .action-area {
+            justify-content: flex-end;
+        }
+
+        .fa-times {
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        @media only screen and (max-width: 800px) {
+            #form-area {
+                position: relative;
+                width: 100%;
+            }
+
+            #table-area {
+                position: relative;
+                float: none;
+                width: 100%;
+            }
+        }
+
+        .toast {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #6ef062;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0px 0px 3px 2px #888888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <div id="form-area">
+            <div id="form-container">
+                <h3 class="mb-4 form-title">Registration form</h3>
+                <form action="" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="username" placeholder="Username"
+                            aria-label="Username" aria-describedby="basic-addon1" required>
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input type="email" class="form-control" name="email" placeholder="Email" aria-label="Email"
+                            aria-describedby="basic-addon2" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">
+                                <i class="fa fa-hashtag" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input type="number" class="form-control" name="age" placeholder="Age" aria-label="Age"
+                            aria-describedby="basic-addon3" required>
+                    </div>
+
+                    <div class="row" id="address">
+                        <div class="form-group col-sm-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="select-country">
+                                        <i class="fa fa-globe" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <select class="custom-select" id="select-country" name="country" required>
+                                    <option value="" selected disabled hidden>Country</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="select-state">
+                                        <i class="fa fa-map" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <select class="custom-select" id="select-state" name="state" required>
+                                    <option value="" selected disabled hidden>State</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="select-city">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <select class="custom-select" id="select-city" name="city" required>
+                                    <option value="" selected disabled hidden>City</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" name="gender" class="custom-control-input"
+                                value="male" required>
+                            <label class="custom-control-label" for="customRadio1">Male</label>
+                        </div>
+                        <div class="custom-control custom-radio ml-3">
+                            <input type="radio" id="customRadio2" name="gender" class="custom-control-input"
+                                value="female">
+                            <label class="custom-control-label" for="customRadio2">Female</label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        Favourite color(s):
+                        <div class="custom-control custom-checkbox ml-3">
+                            <input type="checkbox" class="custom-control-input" id="chk-red" name="color-red">
+                            <label class="custom-control-label" for="chk-red">Red</label>
+                        </div>
+                        <div class="custom-control custom-checkbox ml-3">
+                            <input type="checkbox" class="custom-control-input" id="chk-green" name="color-green">
+                            <label class="custom-control-label" for="chk-green">Green</label>
+                        </div>
+                        <div class="custom-control custom-checkbox ml-3">
+                            <input type="checkbox" class="custom-control-input" id="chk-blue" name="color-blue">
+                            <label class="custom-control-label" for="chk-blue">Blue</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="textarea-message">Message</label>
+                            <textarea class="form-control" id="textarea-message" rows="3" name='message'></textarea>
+                        </div>
+                    </div>
+                    <div class="row action-area">
+                        <input class="btn btn-primary" id="reset" name="reset" type="reset" value="Reset">
+                        <button class="btn btn-primary ml-3" id="submit" name="submit" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="table-area">
+            <table id="entries" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">State</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Fav. color</th>
+                        <th scope="col">Message</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="delete-cancel">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        id="delete-delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast">
+        <div class="toast-body">Data added successfully</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

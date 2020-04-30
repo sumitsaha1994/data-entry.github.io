@@ -77,7 +77,7 @@ $(document).ready(function(){
         console.log(data);
         colorKeys.forEach((cKey, index) => {
             if (cKey in data) {
-                colors += cKey.split('-')[1] + ' ,' ;
+                colors += cKey.split('-')[1] + ', ' ;
                 delete data[cKey];
             }
         });
